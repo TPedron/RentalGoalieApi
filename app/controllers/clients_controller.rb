@@ -1,5 +1,7 @@
 class ClientsController < ApplicationController
   
+  before_action :logged_in_user, only: [:index, :create, :show, :update, :destroy]
+  
   def index
     @clients = Client.all  
     json_response(@clients)

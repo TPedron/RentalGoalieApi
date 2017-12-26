@@ -1,5 +1,7 @@
 class GoaliesController < ApplicationController
   
+  before_action :logged_in_user, only: [:index, :create, :show, :update, :destroy]
+  
   def show
     @goalie = Goalie.find(params[:id])
     json_response(@goalie)

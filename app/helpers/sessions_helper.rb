@@ -32,4 +32,13 @@ module SessionsHelper
     @current_user = nil
   end
   
+  def isUser
+    puts @current_user.type
+    @current_user.type == "Client"
+  end
+  
+  def isGoalie
+    puts @current_user.type
+    @current_user.type == "Goalie"
+  end
 end

@@ -16,6 +16,12 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :games
+  resources :games do
+    member do
+      post :accept
+      post :unaccept
+      post :rate
+    end
+  end
   
 end
