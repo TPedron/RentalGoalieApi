@@ -4,11 +4,15 @@ class GoaliesController < ApplicationController
   
   def show
     @goalie = Goalie.find(params[:id])
+    @goalie.averageRating = @goalie.games.where("goalieRating IS NOT NULL").average('goalieRating')
     json_response(@goalie)
   end
   
   def index
     @goalies = Goalie.all  
+    @goalies.each do |curr|
+      curr.averageRating = curr.games.where("goalieRating IS NOT NULL").average('goalieRating')
+    end
     json_response(@goalies)
   end
   
