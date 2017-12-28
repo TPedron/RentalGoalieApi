@@ -4,7 +4,16 @@ class ClientsController < ApplicationController
   
   def index
     @clients = Client.all  
+    @clients.each do |curr|
+      curr.averageRating = curr.games.where("clientRating IS NOT NULL").average('clientRating')
+    end
     json_response(@clients)
+  end
+  
+  def show
+    @client = Client.find(params[:id])
+    @client.averageRating = @client.games.where("clientRating IS NOT NULL").average('clientRating')
+    json_response(@client)
   end
   
   def create

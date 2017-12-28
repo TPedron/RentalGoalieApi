@@ -10,13 +10,13 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    if params[:view] == "all"
+    if params[:view] == nil || params[:view] == "all"
       @games = Game.all
-    elsif params[:view] == "active"
+    elsif params[:view] == "active_all" || params[:view] == "active"
       @games = Game.where("date >= ?", Time.zone.now)
-    elsif params[:view] == "available"
+    elsif params[:view] == "active_available"
       @games = Game.where(goalie_id: nil).where("date >= ?", Time.zone.now)
-    elsif params[:view] == "taken"
+    elsif params[:view] == "active_taken"
       @games = Game.where("goalie_id > 0").where("date >= ?", Time.zone.now)
     end
     json_response(@games, :ok)
